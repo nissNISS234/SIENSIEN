@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartOasis - Maquette Mobile</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .mockup-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1400px;
+            width: 100%;
+        }
+
+        .phone-mockup {
+            width: 300px;
+            height: 600px;
+            background: #000;
+            border-radius: 25px;
+            padding: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            position: relative;
+            margin: 0 auto;
+        }
+
+        .phone-mockup::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: #333;
+            border-radius: 2px;
+        }
+
+        .screen {
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .status-bar {
+            height: 25px;
+            background: linear-gradient(135deg, #2E7D32, #4CAF50);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 15px;
+            font-size: 12px;
+            color: white;
+            font-weight: 600;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2E7D32, #4CAF50);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: 20px;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .header p {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 20px;
+            height: calc(100% - 45px);
+            overflow-y: auto;
+        }
+
+        .farm-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 4px solid #4CAF50;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .farm-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .farm-name {
+            font-weight: 600;
+            font-size: 16px;
+            color: #2E7D32;
+        }
+
+        .status-badge {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-good { background: #E8F5E8; color: #2E7D32; }
+        .status-warning { background: #FFF3E0; color: #F57C00; }
+        .status-critical { background: #FFEBEE; color: #D32F2F; }
+
+        .sensor-data {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .sensor-item {
+            background: white;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .sensor-value {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2E7D32;
+        }
+
+        .sensor-label {
+            font-size: 11px;
+            color: #666;
+            margin-top: 2px;
+        }
+
+        .recommendation {
+            background: linear-gradient(135deg, #E3F2FD, #BBDEFB);
+            padding: 15px;
+            border-radius: 12px;
+            border-left: 4px solid #2196F3;
+        }
+
+        .recommendation h3 {
+            color: #1976D2;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .recommendation p {
+            font-size: 12px;
+            color: #424242;
+            line-height: 1.4;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #E0E0E0;
+            color: #424242;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .weather-widget {
+            background: linear-gradient(135deg, #FF9800, #F57C00);
+            color: white;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .weather-temp {
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .weather-desc {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        .alerts-section {
+            background: #FFEBEE;
+            border-radius: 12px;
+            padding: 15px;
+            border-left: 4px solid #F44336;
+        }
+
+        .alert-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid #FFCDD2;
+        }
+
+        .alert-item:last-child {
+            border-bottom: none;
+        }
+
+        .alert-icon {
+            width: 20px;
+            height: 20px;
+            background: #F44336;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 10px;
+        }
+
+        .alert-text {
+            font-size: 12px;
+            color: #424242;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .stat-number {
+            font-size: 24px;
+            font-weight: 600;
+            color: #2E7D32;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .chart-placeholder {
+            background: #f5f5f5;
+            height: 150px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 12px;
+            margin: 15px 0;
+        }
+
+        .navigation {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+        }
+
+        .nav-item {
+            text-align: center;
+            color: #666;
+            font-size: 10px;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .nav-item.active {
+            color: #4CAF50;
+        }
+
+        .nav-icon {
+            width: 20px;
+            height: 20px;
+            margin: 0 auto 5px;
+            background: currentColor;
+            border-radius: 2px;
+        }
+
+        .screen-title {
+            position: absolute;
+            top: -30px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .water-drop {
+            display: inline-block;
+            width: 0;
+            height: 0;
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-bottom: 6px solid currentColor;
+            border-radius: 0 0 50% 50%;
+            transform: rotate(45deg);
+        }
+
+        .leaf {
+            display: inline-block;
+            width: 0;
+            height: 0;
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-bottom: 8px solid currentColor;
+            border-radius: 0 0 50% 50%;
+        }
+
+        .settings-list {
+            list-style: none;
+        }
+
+        .settings-item {
+            padding: 15px 0;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .settings-item:last-child {
+            border-bottom: none;
+        }
+
+        .toggle {
+            width: 40px;
+            height: 20px;
+            background: #ccc;
+            border-radius: 10px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .toggle.active {
+            background: #4CAF50;
+        }
+
+        .toggle::after {
+            content: '';
+            width: 16px;
+            height: 16px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            transition: 0.2s;
+        }
+
+        .toggle.active::after {
+            left: 22px;
+        }
+    </style>
+</head>
+<body>
+    <div class="mockup-container">
+        <!-- Écran 1: Accueil / Dashboard -->
+        <div class="phone-mockup">
+            <div class="screen-title">🏠 Accueil / Dashboard</div>
+            <div class="screen">
+                <div class="status-bar">
+                    <span>9:41</span>
+                    <span>🌱 SmartOasis</span>
+                    <span>📶 4G 🔋 85%</span>
+                </div>
+                
+                <div class="header">
+                    <h1><span class="leaf"></span> SmartOasis</h1>
+                    <p>Irrigation Intelligente - Errachidia</p>
+                </div>
+                
+                <div class="content">
+                    <div class="weather-widget">
+                        <div class="weather-temp">32°C</div>
+                        <div class="weather-desc">Ensoleillé - Vent 12 km/h</div>
+                    </div>
+                    
+                    <div class="farm-card">
+                        <div class="farm-header">
+                            <div class="farm-name">🌴 Ferme Oasis Nord</div>
+                            <div class="status-badge status-warning">Attention</div>
+                        </div>
+                        <div class="sensor-data">
+                            <div class="sensor-item">
+                                <div class="sensor-value">28%</div>
+                                <div class="sensor-label">Humidité Sol</div>
+                            </div>
+                            <div class="sensor-item">
+                                <div class="sensor-value">31°C</div>
+                                <div class="sensor-label">Température</div>
+                            </div>
+                            <div class="sensor-item">
+                                <div class="sensor-value">45%</div>
+                                <div class="sensor-label">Humidité Air</div>
+                            </div>
+                            <div class="sensor-item">
+                                <div class="sensor-value">6.8</div>
+                                <div class="sensor-label">pH Sol</div>
+                            </div>
+                        </div>
+                        <div class="recommendation">
+                            <h3>💧 Recommandation IA</h3>
+                            <p>Irrigation recommandée - 25L/m² ce soir (18h-20h). Température élevée détectée.</p>
+                        </div>
+                        <div class="action-buttons">
+                            <button class="btn btn-primary">Irriguer Maintenant</button>
+                            <button class="btn btn-secondary">Programmer</button>
+                        </div>
+                    </div>
+                    
+                    <div class="farm-card">
+                        <div class="farm-header">
+                            <div class="farm-name">🫒 Ferme Oliviers Sud</div>
+                            <div class="status-badge status-good">Optimal</div>
+                        </div>
+                        <div class="sensor-data">
+                            <div class="sensor-item">
+                                <div class="sensor-value">42%</div>
+                                <div class="sensor-label">Humidité Sol</div>
+                            </div>
+                            <div class="sensor-item">
+                                <div class="sensor-value">29°C</div>
+                                <div class="sensor-label">Température</div>
+                            </div>
+                        </div>
+                        <p style="font-size: 12px; color: #4CAF50; text-align: center; margin-top: 10px;">
+                            ✅ Aucune irrigation nécessaire
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="navigation">
+                    <div class="nav-item active">
+                        <div class="nav-icon"></div>
+                        <div>Accueil</div>
+                    </div>
+                    <div class="nav-item">
+                        <div class="nav-icon"></div>
+                        <div>Fermes</div>
+                    </div>
+                    <div class="nav-item">
+                        <div class="nav-icon"></div>
+                        <div>Alertes</div>
+                    </div>
+                    <div class="nav-item">
+                        <div class="nav-icon"></div>
+                        <div>Stats</div>
+                    </div>
+                    <div class="nav-item">
+                        <div class="nav-icon"></div>
+                        <div>Profil</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Écran 2: Détails Ferme -->
+        <div class="phone-mockup">
+            <div class="screen-title">🌾 Détails Ferme</div>
+            <div class="screen">
+                <div class="status-bar">
+                    <span>9:41</span>
+                    <span>🌱 SmartOasis</span>
+                    <span>📶 4G 🔋 85%</span>
+                </div>
+                
+                <div class="header">
+                    <h1>🌴 Ferme Oasis Nord</h1>
+                    <p>Palmiers Dattiers - 2.5 hectares</p>
+                </div>
+                
+                <div class="content">
+                    <div class="sensor-data">
+                        <div class="sensor-item">
+                            <div class="sensor-value">28%</div>
+                            <div class="sensor-label">Humidité Sol</div>
+                        </div>
+                        <div class="sensor-item">
+                            <div class="sensor-value">31°C</div>
+                            <div class="sensor-label">Température</div>
+                        </div>
+                        <div class="sensor-item">
+                            <div class="sensor-value">45%</div>
+                            <div class="sensor-label">Humidité Air</div>
+                        </div>
+                        <div class="sensor-item">
+                            <div class="sensor-value">6.8</div>
+                            <div class="sensor-label">pH Sol</div>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-placeholder">
+                        📊 Graphique évolution humidité sol (7 derniers jours)
+                    </div>
+                    
+                    <div class="recommendation">
+                        <h3>🤖 Analyse IA SmartOasis</h3>
+                        <p><strong>Recommandation :</strong> Irrigation recommandée</p>
+                        <p><strong>Quantité :</strong> 25 litres/m²</p>
+                        <p><strong>Moment optimal :</strong> Ce soir (18h-20h)</p>
+                        <p><strong>Raisons :</strong></p>
+                        <ul style="font-size: 11px; margin-left: 15px; margin-top: 5px;">
+                            <li>Humidité du sol faible (< 30%)</li>
+                            <li>Température élevée (> 30°C)</li>
+                            <li>Culture de palmiers dattiers</li>
+                        </ul>
+                        <p style="margin-top: 8px;"><strong>Confiance :</strong> 90%</p>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="btn btn-primary">💧 Irriguer Maintenant</button>
+                        <button class="btn btn-secondary">⏰ Programmer</button>
+                    </div>
+                    
+                    <div style="margin-top: 15px; padding: 10px; background: #f0f0f0; border-radius: 8px;">
+                        <h4 style="font-size: 12px; color: #666;">Dernière irrigation</h4>
+                        <p style="font-size: 11px; color: #424242;">Il y a 3 jours - 20L/m² (Automatique)</p>
+                    </div>
+                </div>
+                
+                <div class="navigation">
+                    <div class="nav-item">
+                        <div class="nav-icon"></div>
+                        <div>Accueil</div>
+                    </div>
+                    <div class="nav-item active">
+                        <div class="nav-icon"></div>
+                        <div>Fermes</div>
+                    </div>
+                    <div class="nav-item">
+                        <div class="nav-icon"></div>
+                        <div>Alertes</div>
+                    </div>
+                    <div class="nav-item">
+                        <div class="nav-icon"></div>
+                        <div>Stats</div>
+                    </div>
+                    <div class="nav-item">
+                        <div class="nav-icon"></div>
+                        <div>Profil</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Écran 3: Alertes -->
+        <div class="phone-mockup">
+            <div class="screen-title">🚨 Alertes & Notifications</div>
+            <div class="screen">
+                <div class="status-bar">
+                    <span>9:41</span>
+                    <span>🌱 SmartOasis</span>
+                    <span>📶 4G 🔋 85%</span>
+                </div>
+                
+                <div class="header">
+                    <h1>🚨 Alertes</h1>
+                    <p>3 alertes actives</p>
+                </div>
+                
+                <div class="content">
+                    <div class="alerts-section">
+                        <h3 style="color: #D32F2F; font-size: 14px; margin-bottom: 10px;">Alertes Critiques</h3>
+                        <div class="alert-item">
+                            <div class="alert-icon">!</div>
+                            <div>
+                                <div class="alert-text"><strong>Humidité critique</strong></div>
+                                <div style="font-size: 10px; color: #666;">Ferme Oasis Nord - Il y a 15 min</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="background: #FFF3E0; border-radius: 12px; padding: 15px; margin: 15px 0; border-left: 4px solid #FF9800;">
+                        <h3 style="color: #F57C00; font-size: 14px; margin-bottom: 10px;">Alertes Moyennes</h3>
+                        <div class="alert-item">
+                            <div class="alert-icon" style="background: #FF9800;">⚠</div>
+                            <div>
+                                <div class="alert-text"><strong>Température élevée</strong></div>
+                                <div style="font-size: 10px; color: #666;">Ferme Oasis Nord - Il y a 1h</div>
+                            </div>
+                        </div>
+                        <div class="alert-item">
+                            <div class="alert-icon" style="background: #FF9800;">📡</div>
+                            <div>
+                                <div class="alert-text"><strong>Capteur déconnecté</strong></div>
+                                <div style="font-size: 10px; color: #666;">Capteur S003 - Il y a 2h</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="background: #E8F5E8; border-radius: 12px; padding: 15px; border-left: 4px solid #4CAF50;">
+                        <h3 style="color: #2E7D32; font-size: 14px; margin-bottom: 10px;">Messages Info</h3>
+                        <div class="alert-item">
+                            <div class="alert-icon" style="background: #4CAF50;">ℹ</div>
+                            <div>
+                                <div class="alert-text"><strong>Irrigation programmée</strong></div>
+                                <div style="font-size: 10px; color: #666;">Ferme Oliviers Sud - Demain 6h</div>
+                            </div>
+                        </div>
+                        <div class="alert-item">
+                            <div class="alert-icon" style="background: #4CAF50;">🌧</div>
+                            <div>
+                                <div class="alert-text"><strong>Pluie prévue</strong></div>
+                                <div style="font-size: 10px; color: #666;">Demain après-midi - 8mm</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="btn btn-primary">Marquer tout comme lu</button>
+                        <button class="btn btn-secondary">Paramètres alertes</button>
+                    </div>
+                </div>
+                
+                <div class="navigation">
+                    <div class="nav-item">
+                        <div class="nav-icon"></div>
+                        <div>Accueil</div>
+                    </div>
+                    <div class="nav-item">
+                        <div class="nav-icon"></div>
+                        <div>Fermes</div>
+                    </div>
+                    <div class="nav-item active">
+                        <div class="nav-icon"></div>
+                        <div>Alertes</div>
+                    </div>
+                    <div class="nav-item">
+                        <div class="nav-icon"></div>
+                        <div>Stats</div>
+                    </div>
+                    <div class="nav-item">
+                        <div class="nav-icon"></div>
+                        <div>Profil</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Écran 4: Statistiques -->
+        <div class="phone-mockup">
+            <div class="screen-title">📊 Statistiques & Analytics</div>
+            <div class="screen">
+                <div class="status-bar">
+                    <span>9:41</span>
+                    <span>🌱 SmartOasis</span>
+                    <span>📶 4G 🔋 85%</span>
+                </div>
+                
+                <div class="header">
+                    <h1>📊 Statistiques</h1>
+                    <p>Période: 30 derniers jours</p>
+                </div>
+                
+                <div class="content">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number">1,250L</div>
+                            <div class="stat-label">Eau économisée</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">-32%</div>
+                            <div class="stat-label">Consommation</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">24</div>
+                            <div class="stat-label">Irrigations</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">98%</div>
+                            <div class="stat-label">Efficacité</div>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-placeholder">
+                        🌊 Graphique consommation d'eau par semaine
+                    </div>
+                    
+                    <div class="chart-placeholder">
+                        🌡️ Évolution température et humidité
+                    </div>
+                    
+                    <div style="background: #E3F2FD; padding: 15px; border-radius: 12px; margin-top: 15px;">
+                        <h3 style="color: #1976D2; font-size: 14px; margin-bottom: 10px;">💡 Insights IA</h3>
+                        <ul style="font-size: 12px; color: #424242; margin-left: 15px;">
+                            <li>Économie de 32% par rapport au mois dernier</li>
+                            <li>Meilleure efficacité entre 18h-20h</li>
+                            <li>Palmiers dattiers optimisés avec irrigation ciblée</li>
+                            <li>Prévision: -15% supplémentaire possible</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="btn btn-primary">Rapport Détaillé</button>
+                        <button class="btn btn-secondary">Exporter PDF</button>
+                    </div>
+                </div>
+                
+                <div class="navigation">
+                    <div class="nav-item">
+                        <div class="nav-icon"></div>
+                        <div>Accueil</div>
+                    </div>
+                    <div class="nav-item">
+                        <div class="nav-icon"></div>
+                        <div>Fermes</div>
+                    </div>
+                    <div class="nav-item">
+                        <div class="nav-icon"></div>
+                        <div>Alertes</div>
+                    </div>
+                    <div class="nav-item active">
+                        <div class="nav-icon"></div>
+                        <div>Stats</div>
+                    </div>
+                    <div class="nav-item">
+                        <div class="nav-icon"></div>
+                        <div>Profil</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Écran 5: Profil & Paramètres -->
+        <div class="phone-mockup">
+            <div class="screen-title">👤 Profil & Paramètres</div>
+            <div class="screen">
+                <div class="status-bar">
+                    <span>9:41</span>
+                    <span>🌱 SmartOasis</span>
+                    <span>📶 4G 🔋 85%</span>
+                </div>
+                
+                <div class="header">
+                    <h1>👤 Profil</h1>
+                    <p>Ahmed Benali - Coopérative Oasis</p>
+                </div>
+                
+                <div class="content">
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <div style="width: 80px; height: 80px; background: #4CAF50; border-radius: 50%; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px;">
+                            👨‍🌾
+                        </div>
+                        <h2 style="font-size: 18px; color: #2E7D32;">Ahmed Benali</h2>
+                        <p style="font-size: 12px; color: #666;">Coopérative Agricole Oasis - Errachidia</p>
+                        <p style="font-size: 11px; color: #999;">Membre depuis Mars 2024</p>
+                    </div>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number">2</div>
+                            <div class="stat-label">Fermes</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">5</div>
+                            <div class="stat-label">Capteurs</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">4.2ha</div>
+                            <div class="stat-label">Surface totale</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">-28%</div>
+                            <div class="stat-label">Économie eau</div>
+                        </div>
+                    </div>
+                    
+                    <ul class="settings-list">
+                        <li class="settings-item">
+                            <span style="font-size: 14px;">🔔 Notifications push</span>
+                            <div class="toggle active"></div>
+                        </li>
+                        <li class="settings-item">
+                            <span style="font-size: 14px;">📧 Alertes email</span>
+                            <div class="toggle active"></div>
+                        </li>
+                        <li class="settings-item">
+                            <span style="font-size: 14px;">🤖 Irrigation automatique</span>
+                            <div class="toggle"></div>
+                        </li>
+                        <li class="settings-item">
+                            <span style="font-size: 14px;">🌙 Mode économie</span>
+                            <div class="toggle active"></div>
+                        </li>
+                        <li class="settings-item">
+                            <span style="font-size: 14px;">📊 Rapports hebdomadaires</span>
+                            <div class="toggle active"></div>
+                        </li>
+                    </ul>
+                    
+                    <div style="margin-top: 20px;">
+                        <button class="btn btn-secondary" style="width: 100%; margin-bottom: 10px;">
+                            ⚙️ Paramètres avancés
+                        </button>
+                        <button class="btn btn-secondary" style="width: 100%; margin-bottom: 10px;">
+                            📞 Support technique 
+                        </button>
+                        <button class="btn btn-secondary" style="width: 100%; margin-bottom: 10px;">
+                            📚 Guide d'utilisation
+                        </button>
+                        <button class="btn btn-primary" style="width: 100%;">
+                            🔄 Synchroniser données
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="navigation">
+                    <div class="nav-item">
+                        <div class="nav-icon"></div>
+                        <div>Accueil</div>
+                    </div>
+                    <div class="nav-item">
+                        <div class="nav-icon"></div>
+                        <div>Fermes</div>
+                    </div>
+                    <div class="nav-item">
+                        <div class="nav-icon"></div>
+                        <div>Alertes</div>
+                    </div>
+                    <div class="nav-item">
+                        <div class="nav-icon"></div>
+                        <div>Stats</div>
+                    </div>
+                    <div class="nav-item active">
+                        <div class="nav-icon"></div>
+                        <div>Profil</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Écran 6: Contrôle Irrigation -->
+        <div class="phone-mockup">
+            <div class="screen-title">💧 Contrôle Irrigation</div>
+            <div class="screen">
+                <div class="status-bar">
+                    <span>9:41</span>
+                    <span>🌱 SmartOasis</span>
+                    <span>📶 4G 🔋 85%</span>
+                </div>
+                
+                <div class="header">
+                    <h1>💧 Irrigation</h1>
+                    <p>Ferme Oasis Nord - Contrôle manuel</p>
+                </div>
+                
+                <div class="content">
+                    <div style="background: #E8F5E8; padding: 20px; border-radius: 12px; text-align: center; margin-bottom: 20px;">
+                        <div style="font-size: 48px; margin-bottom: 10px;">💧</div>
+                        <h2 style="color: #2E7D32; margin-bottom: 5px;">Système prêt</h2>
+                        <p style="font-size: 12px; color: #666;">Pression: 2.1 bar • Débit: 15L/min</p>
+                    </div>
+                    
+                    <div class="recommendation" style="margin-bottom: 20px;">
+                        <h3>🤖 Recommandation SmartOasis</h3>
+                        <p><strong>Quantité suggérée:</strong> 25 litres/m²</p>
+                        <p><strong>Durée estimée:</strong> 42 minutes</p>
+                        <p><strong>Coût estimé:</strong> 15.50 DH</p>
+                    </div>
+                    
+                    <div style="background: white; padding: 20px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                        <h3 style="font-size: 14px; margin-bottom: 15px; color: #2E7D32;">⚙️ Paramètres d'irrigation</h3>
+                        
+                        <div style="margin-bottom: 15px;">
+                            <label style="font-size: 12px; color: #666; display: block; margin-bottom: 5px;">Durée (minutes)</label>
+                            <input type="range" min="10" max="120" value="42" style="width: 100%; margin-bottom: 5px;">
+                            <div style="font-size: 12px; color: #4CAF50; text-align: center;">42 minutes</div>
+                        </div>
+                        
+                        <div style="margin-bottom: 15px;">
+                            <label style="font-size: 12px; color: #666; display: block; margin-bottom: 5px;">Intensité</label>
+                            <input type="range" min="1" max="5" value="3" style="width: 100%; margin-bottom: 5px;">
+                            <div style="font-size: 12px; color: #4CAF50; text-align: center;">Moyenne</div>
+                        </div>
+                        
+                        <div style="display: flex; gap: 10px; margin-top: 15px;">
+                            <button style="flex: 1; padding: 8px; background: #E8F5E8; color: #2E7D32; border: 1px solid #4CAF50; border-radius: 6px; font-size: 11px;">
+                                ⏰ Programmer
+                            </button>
+                            <button style="flex: 1; padding: 8px; background: #E3F2FD; color: #1976D2; border: 1px solid #2196F3; border-radius: 6px; font-size: 11px;">
+                                🤖 Mode Auto
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" style="font-size: 16px; padding: 15px;">
+                            ▶️ DÉMARRER IRRIGATION
+                        </button>
+                    </div>
+                    
+                    <div style="margin-top: 15px; padding: 10px; background: #FFF3E0; border-radius: 8px; border-left: 4px solid #FF9800;">
+                        <h4 style="font-size: 12px; color: #F57C00;">⚠️ Rappel</h4>
+                        <p style="font-size: 11px; color: #424242;">Optimal entre 18h-20h pour éviter l'évaporation. Température actuelle: 31°C</p>
+                    </div>
+                </div>
+                
+                <div class="navigation">
+                    <div class="nav-item">
+                        <div class="nav-icon"></div>
+                        <div>Accueil</div>
+                    </div>
+                    <div class="nav-item active">
+                        <div class="nav-icon"></div>
+                        <div>Fermes</div>
+                    </div>
+                    <div class="nav-item">
+                        <div class="nav-icon"></div>
+                        <div>Alertes</div>
+                    </div>
+                    <div class="nav-item">
+                        <div class="nav-icon"></div>
+                        <div>Stats</div>
+                    </div>
+                    <div class="nav-item">
+                        <div class="nav-icon"></div>
+                        <div>Profil</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Animation pour simuler l'interactivité
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animation des boutons
+            const buttons = document.querySelectorAll('.btn');
+            buttons.forEach(button => {
+                button.addEventListener('click', function() {
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = 'scale(1)';
+                    }, 100);
+                });
+            });
+
+            // Animation des toggles
+            const toggles = document.querySelectorAll('.toggle');
+            toggles.forEach(toggle => {
+                toggle.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                });
+            });
+
+            // Simulation de données en temps réel
+            function updateSensorData() {
+                const sensorValues = document.querySelectorAll('.sensor-value');
+                sensorValues.forEach(value => {
+                    if (value.textContent.includes('%')) {
+                        const currentValue = parseInt(value.textContent);
+                        const newValue = currentValue + (Math.random() - 0.5) * 2;
+                        value.textContent = Math.max(0, Math.min(100, Math.round(newValue))) + '%';
+                    }
+                });
+            }
+
+            // Mise à jour toutes les 5 secondes
+            setInterval(updateSensorData, 5000);
+
+            // Animation de chargement pour les graphiques
+            const chartPlaceholders = document.querySelectorAll('.chart-placeholder');
+            chartPlaceholders.forEach(chart => {
+                chart.addEventListener('click', function() {
+                    this.style.background = 'linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%)';
+                    this.style.backgroundSize = '200% 100%';
+                    this.style.animation = 'loading 2s infinite';
+                    this.textContent = 'Chargement des données...';
+                    
+                    setTimeout(() => {
+                        this.style.animation = '';
+                        this.style.background = '#f5f5f5';
+                        this.textContent = '📊 Données chargées avec succès';
+                    }, 2000);
+                });
+            });
+        });
+
+        // Ajout des styles d'animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes loading {
+                0% { background-position: 200% 0; }
+                100% { background-position: -200% 0; }
+            }
+            
+            .btn:active {
+                transform: scale(0.95) !important;
+            }
+            
+            .sensor-value {
+                transition: all 0.3s ease;
+            }
+            
+            .sensor-value:hover {
+                transform: scale(1.05);
+                color: #1976D2;
+            }
+            
+            .farm-card {
+                transition: all 0.2s ease;
+            }
+            
+            .farm-card:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            }
+            
+            .nav-item {
+                transition: all 0.2s ease;
+            }
+            
+            .nav-item:hover {
+                transform: translateY(-1px);
+                color: #4CAF50;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
